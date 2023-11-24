@@ -20,7 +20,10 @@ const suscribe = async () => {
 
         const response = await axios.post(`${MERCURY_BACKEND_ENDPOINT}/event`, data, config);
 
-        console.log(response.data);
+        if (response.status == 200) {
+            console.log("success");
+        }
+        //console.log(response.data);
 
     } catch (error) {
         console.error('Error fetching data: ', error);
