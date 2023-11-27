@@ -1,10 +1,11 @@
 const axios = require('axios');
+const sorobanClient = require('soroban-client');
 
 const MERCURY_ACCESS_TOKEN = process.env.MERCURY_ACCESS_TOKEN;
 const MERCURY_BACKEND_ENDPOINT = process.env.MERCURY_BACKEND_ENDPOINT;
 const SMARTDEPLOY_CONTRACT = process.env.SMARTDEPLOY_CONTRACT;
 
-const suscribe = async () => {
+const suscribe_deploy = async () => {
     try {
 
         const config = {
@@ -15,6 +16,7 @@ const suscribe = async () => {
 
         const data = {
             contract_id: SMARTDEPLOY_CONTRACT,
+            topic1: sorobanClient.nativeToScVal("transfer").toXDR("base64"),
             max_single_size: 2000
         };
 
@@ -30,4 +32,4 @@ const suscribe = async () => {
     }
 };
 
-suscribe();
+suscribe_deploy();

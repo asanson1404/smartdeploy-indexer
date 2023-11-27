@@ -2,27 +2,25 @@ const { runQuery } = require("./runQuery");
 
 const contractAddress = process.env.SMARTDEPLOY_CONTRACT;
 
-const query = `query SmartDeployEvents($id: String!) {
-    eventByContractId(
-        searchedContractId: $id
-    ) {
+const query = `query DeployEvents {
+    eventByTopic(t1: "AAAADgAAAAZkZXBsb3kAAA==") {
         edges {
             node {
                 contractId
                 data
                 ledger
                 ledgerTimestamp
-                topic2
                 topic1
-                topic4
+                topic2
                 topic3
+                topic4
             }
         }
     }   
 }`;
 
 const variables = {
-    id: contractAddress
+    
 };
 
 runQuery(query, variables);
