@@ -16,7 +16,7 @@ const suscribe_deploy = async () => {
 
         const data = {
             contract_id: SMARTDEPLOY_CONTRACT,
-            topic1: sorobanClient.nativeToScVal("transfer").toXDR("base64"),
+            topic1: sorobanClient.nativeToScVal("deploy").toXDR("base64"),
             max_single_size: 2000
         };
 
