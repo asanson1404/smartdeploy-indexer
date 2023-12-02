@@ -1,5 +1,6 @@
 const axios = require('axios');
-const fs = require('fs')
+const fs = require('fs');
+const sorobanClient = require('soroban-client');
 
 const MERCURY_ACCESS_TOKEN = process.env.MERCURY_ACCESS_TOKEN;
 const MERCURY_GRAPHQL_ENDPOINT = process.env.MERCURY_GRAPHQL_ENDPOINT;
@@ -33,12 +34,25 @@ const runQuery = async (query, variables) => {
         }
 
         const response = await axios.post(`${MERCURY_GRAPHQL_ENDPOINT}/graphql`, data, config);
+
         if (response.status == 200) {
             console.log("success");
-            console.log(response.data);
-            const jsonToSave = JSON.stringify(response.data, null, 2);
+
+            const deployDataFileName = 'results/deployEventData.json';
+            const nbEvents = response.data.data.eventByTopic.edges.length;
+
+            // Create the object which gather all the deploy events datas
+            const deployObj = {};
+            for(let i = 0; i < nbEvents; i++) {
+                const xdrDataEvent = response.data.data.eventByTopic.edges[i].node.data;
+                const jsDataEvent = sorobanClient.scValToNative(sorobanClient.xdr.ScVal.fromXDR(xdrDataEvent, 'base64'));
+                deployObj[`deploy${i}`] = { jsDataEvent };
+            }
+
+            // Stringify the object and display it in a file
+            const jsonToSave = JSON.stringify(deployObj, null, 2);
             try {
-                fs.writeFileSync('results/responseData.json', jsonToSave);
+                fs.writeFileSync(deployDataFileName, jsonToSave);
 
             } catch (error) {
                 console.error("error saving file: ", error);
