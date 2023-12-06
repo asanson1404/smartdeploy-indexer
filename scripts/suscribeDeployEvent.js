@@ -1,4 +1,5 @@
 const axios = require('axios');
+require("dotenv").config();
 const sorobanClient = require('soroban-client');
 
 const MERCURY_ACCESS_TOKEN = process.env.MERCURY_ACCESS_TOKEN;
@@ -25,7 +26,7 @@ const suscribe_deploy = async () => {
         if (response.status == 200) {
             console.log("success");
         }
-        //console.log(response.data);
+        //console.log(response);
 
     } catch (error) {
         console.error('Error fetching data: ', error);

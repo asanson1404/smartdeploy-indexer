@@ -1,5 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
+require("dotenv").config();
 const sorobanClient = require('soroban-client');
 
 const MERCURY_ACCESS_TOKEN = process.env.MERCURY_ACCESS_TOKEN;

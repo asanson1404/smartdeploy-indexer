@@ -1,5 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
+require("dotenv").config();
 const graphql = require('graphql');
 const graphql_tag = require('graphql-tag');
 

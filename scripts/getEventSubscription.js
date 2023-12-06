@@ -1,4 +1,5 @@
 const { runQuery } = require("./runQuery");
+require("dotenv").config();
 const sorobanClient = require('soroban-client');
 
 const contractAddress = process.env.SMARTDEPLOY_CONTRACT;
