@@ -17,7 +17,7 @@ const subscribe_publish = async () => {
 
         const data = {
             contract_id: SMARTDEPLOY_CONTRACT,
-            topic1: sorobanClient.xdr.ScVal.scvSymbol("publish").toXDR("base64"),
+            topic1: sorobanClient.xdr.ScVal.scvSymbol("Publish").toXDR("base64"),
             max_single_size: 2000
         };
 

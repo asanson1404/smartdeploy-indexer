@@ -3,7 +3,7 @@ require("dotenv").config();
 const sorobanClient = require('soroban-client');
 
 const contractAddress = process.env.SMARTDEPLOY_CONTRACT;
-const xdrTopic1 = sorobanClient.xdr.ScVal.scvSymbol("publish").toXDR("base64");
+const xdrTopic1 = sorobanClient.xdr.ScVal.scvSymbol("Publish").toXDR("base64");
 
 const query = `query PublishEvents {
     eventByTopic(t1: "${xdrTopic1}") {
