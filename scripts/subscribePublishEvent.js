@@ -23,7 +23,7 @@ const subscribe_publish = async () => {
 
         const response = await axios.post(`${MERCURY_BACKEND_ENDPOINT}/event`, data, config);
 
-        if (response.status == 200) {
+        if (response.status == 201) {
             console.log("success");
         }
         //console.log(response);
