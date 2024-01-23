@@ -26,4 +26,4 @@ const variables = {
     
 };
 
-runQuery(query, variables);
+runQuery(query, variables, "Deploy");

@@ -21,7 +21,7 @@ try {
 }
 
 // Now we will get some information about the contract we subscribed:
-const runQuery = async (query, variables) => {
+const runQuery = async (query, variables, name) => {
     try {
         const config = {
             headers: {
@@ -39,21 +39,27 @@ const runQuery = async (query, variables) => {
         if (response.status == 200) {
             console.log("success");
 
-            const deployDataFileName = 'results/deployEventData.json';
+            let resultFileName;
+
+            if (name === "Deploy") {
+                resultFileName = 'results/deployEventData.json';
+            } else if (name === "Publish") {
+                resultFileName = 'results/publishEventData.json';
+            }
             const nbEvents = response.data.data.eventByTopic.edges.length;
 
-            // Create the object which gather all the deploy events datas
-            const deployObj = {};
+            // Create the object which gather all the events datas
+            const eventObj = {};
             for(let i = 0; i < nbEvents; i++) {
                 const xdrDataEvent = response.data.data.eventByTopic.edges[i].node.data;
                 const jsDataEvent = sorobanClient.scValToNative(sorobanClient.xdr.ScVal.fromXDR(xdrDataEvent, 'base64'));
-                deployObj[`deploy${i}`] = { jsDataEvent };
+                eventObj[`event${i}`] = { jsDataEvent };
             }
 
             // Stringify the object and display it in a file
-            const jsonToSave = JSON.stringify(deployObj, null, 2);
+            const jsonToSave = JSON.stringify(eventObj, null, 2);
             try {
-                fs.writeFileSync(deployDataFileName, jsonToSave);
+                fs.writeFileSync(resultFileName, jsonToSave);
 
             } catch (error) {
                 console.error("error saving file: ", error);
