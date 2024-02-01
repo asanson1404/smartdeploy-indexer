@@ -16,8 +16,8 @@ You'll need to paste your access token as well as the address of the Soroban Sma
 ```
 MERCURY_ACCESS_TOKEN=net-set-here
 CONTRACT_ADDRESS=CDNOMEB3ZQHS5WPCUPQ7IS4OKGTOTBRDCZUITBRNSQAB63JJ52JFO4KX
-MERCURY_BACKEND_ENDPOINT=http://ec2-16-170-242-7.eu-north-1.compute.amazonaws.com:3030
-MERCURY_GRAPHQL_ENDPOINT=http://ec2-16-170-242-7.eu-north-1.compute.amazonaws.com:5000
+MERCURY_BACKEND_ENDPOINT=https://api.mercurydata.app:8443
+MERCURY_GRAPHQL_ENDPOINT=https://api.mercurydata.app:2083
 ```
 
 2. Run a node docker image and install:
